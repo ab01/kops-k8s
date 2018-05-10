@@ -1,0 +1,41 @@
+awscli installation:	http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html
+
+-	pip install awscli --upgrade --user
+-	~/.local/bin
+-	which python
+-	ls -al /usr/local/bin/python
+-	export PATH=~/.local/bin:$PATH
+-	source ~/.bash_profile
+-	~/.local/bin/aws --version
+-	chmod +x ~/.local/bin/aws
+-	aws configure list
+
+-------------------------------------------------------------------------------------------------------------------
+
+Install kebernetes with kops on AWS
+
+-	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+-	chmod +x ./kubectl
+-	mv kubectl /usr/local/bin/
+
+-	https://github.com/kubernetes/kops/releases/download/1.9.0/kops-linux-amd64
+-	chmod +x kops-linux-amd64
+-	mv kops-linux-amd64 /usr/local/bin/kops
+-	aws configure
+
+-	aws s3 mb s3://cluster.tech-learn.xyz
+-	export KOPS_STATE_STORE=s3://cluster.tech-learn.xyz
+-	cp /home/centos/.ssh/authorized_keys ~/.ssh/id_rsa.pub
+
+For creation
+-	kops create cluster --cloud=aws --zones=us-east-1c --dns-zone=tech-learn.xyz --name=cluster.tech-learn.xyz --yes
+
+kops create cluster --cloud=aws --zones=us-east-1c --dns-zone=tech-learn.xyz --name=cluster.tech-learn.xyz --ssh-public-key ~/.ssh/id_rsa.pub --yes
+kops create cluster --cloud=aws --zones=us-west-2a --dns-zone=tech-learn.xyz --name=my-happy-cluster --ssh-public-key ~/.ssh/id_rsa.pub --yes
+-	kops validate cluster
+-	kubectl get nodes
+
+For deletion
+-	kops delete cluster --name=cluster.tech-learn.xyz --yes
+
+https://kubernetes.io/docs/getting-started-guides/kops/

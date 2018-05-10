@@ -1,0 +1,7 @@
+kops create cluster --cloud=aws --zones=us-east-1a,us-east-1b --master-zones eu-east-1a,eu-east-1b --vpc=vpc-cf92b4b4 --dns-zone=akilimawazo.info --master-size=t2.medium --node-size=t2.large --node-count=2 --name=kubernetes.akilimawazo.info --networking weave --ssh-public-key ~/.ssh/id_rsa.pub --state=s3://akilimawazo.info --yes
+
+kops validate cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info
+
+kops edit cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info
+
+kops upgrade cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info --yes
