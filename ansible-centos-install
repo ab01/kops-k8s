@@ -1,0 +1,9 @@
+yum groupinstall 'Development Tools' -y
+yum install python-virtualenv libffi-devel openssl-devel python-cffi pyYAML
+mkdir ansible
+cd ansible
+virtualenv venv27
+source venv27/bin/activate
+pip install ansible
+pip uninstall ansible
+pip install git+https://github.com/ansible/ansible
