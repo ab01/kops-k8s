@@ -8,3 +8,13 @@ kops upgrade cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info -
 
 #permission to allow all service accounts
 kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
+
+## Kops using spot instances
+
+#kops create cluster --cloud=aws --zones=us-east-1a,us-east-1b --master-zones us-east-1a --vpc=vpc-cf92b4b4 --dns-zone=akilimawazo.info --master-size=t2.small --node-size=m3.medium --node-count=2 --name=kubernetes.akilimawazo.info --networking weave --ssh-public-key ~/.ssh/id_rsa.pub --state=s3://akilimawazo.info --yes --dry-run --output yaml | tee kubernetes.akilimawazo.info.yaml
+
+#kops create secret  sshpublickey --name kubernetes.akilimawazo.info admin -i ~/.ssh/id_rsa.pub --state=s3://akilimawazo.info
+
+#kops update cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info --yes
+
+#kops validate cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info
