@@ -13,6 +13,8 @@ kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin
 
 #kops create cluster --cloud=aws --zones=us-east-1a,us-east-1b --master-zones us-east-1a --vpc=vpc-cf92b4b4 --dns-zone=akilimawazo.info --master-size=t2.small --node-size=m3.medium --node-count=2 --name=kubernetes.akilimawazo.info --networking weave --ssh-public-key ~/.ssh/id_rsa.pub --state=s3://akilimawazo.info --yes --dry-run --output yaml | tee kubernetes.akilimawazo.info.yaml
 
+# add max_price="$0.00" in file kubernetes.akilimawazo.info.yaml in instance group
+
 #kops create secret  sshpublickey --name kubernetes.akilimawazo.info admin -i ~/.ssh/id_rsa.pub --state=s3://akilimawazo.info
 
 #kops update cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info --yes
@@ -30,3 +32,5 @@ kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin
       Id: InstanceId, 
       Name: Tags[?Key==`Name`].Value|[0]}' \
   --output table
+  
+#kops delete cluster kubernetes.akilimawazo.info --state=s3://akilimawazo.info --yes
